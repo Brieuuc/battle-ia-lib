@@ -21,15 +21,14 @@ typedef struct BC_List_ {
 } BC_List;
 
 typedef struct BC_Vector3_ {
-  int x;
-  int y;
-  int z;
+  double x;
+  double y;
+  double z;
 } BC_Vector3;
 
 typedef struct BC_Vector2_ {
-  int x;
-  int y;
-  int z;
+  double x;
+  double y;
 } BC_Vector2;
 
 enum BC_ObjectType { OT_PLAYER, OT_WALL, OT_BOOST };
@@ -64,11 +63,18 @@ typedef struct BC_WorldInfo_ {
   bool radar_enabled;
 } BC_WorldInfo;
 
+typedef enum BC_ShootResultFailReason_ {
+  UNKNOWN,
+  COOLDOWN,
+  MISS
+} BC_ShootResultFailReason;
+
 typedef struct BC_ShootResult_ {
   bool success;           // Whether the shot was successful
   uint64_t target_id;     // ID of the target (if hit)
   uint64_t damage_points; // Damage dealt to the target
   bool target_destroyed;  // Whether the target was destroyed
+  BC_ShootResultFailReason fail_reason;
 } BC_ShootResult;
 
 /**
